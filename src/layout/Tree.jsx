@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { Button } from "reactstrap";
 
 const Tree = (props) => {
-  console.log("tree props:", props);
   const { selectedFilter, enteredSearch, filteredList, collections } = props;
+
+  const artPreviewClicker = (e) => {
+    props.onArtPreviewClick(e.target.value);
+  };
 
   return (
     <>
@@ -15,7 +19,12 @@ const Tree = (props) => {
               <ul>
                 {collectionItem.collection.map((collectionItemInside) => (
                   <li key={collectionItemInside.id}>
-                    <a href="#">{collectionItemInside.name}</a>
+                    <Button
+                      value={collectionItemInside.id}
+                      onClick={(e) => artPreviewClicker(e)}
+                    >
+                      {collectionItemInside.name}
+                    </Button>
                   </li>
                 ))}
               </ul>
