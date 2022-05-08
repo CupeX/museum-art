@@ -53,6 +53,10 @@ const ArtPreviewPage = () => {
   //   );
   // };
 
+  const editArtHandler = () => {
+    console.log("edit art handler", artSelected);
+  };
+
   return (
     <CardGroup>
       <Card>
@@ -75,6 +79,7 @@ const ArtPreviewPage = () => {
         <ArtPreview
           artSelected={artSelected}
           collectionsById={collectionsById}
+          onEditArt={editArtHandler}
         />
       </Card>
     </CardGroup>

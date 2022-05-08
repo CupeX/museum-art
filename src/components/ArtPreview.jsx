@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -16,6 +16,10 @@ const ArtPreview = (props) => {
 
   const selectedArt = collectionsById.find((artId) => artId.id === artSelected);
 
+  const onEditClicked = () => {
+    props.onEditArt();
+  };
+
   return (
     <>
       {artSelected ? (
@@ -29,7 +33,12 @@ const ArtPreview = (props) => {
           <CardBody>
             <div className="d-flex justify-content-between pb-3">
               <CardTitle tag="h5">{selectedArt.name}</CardTitle>
-              <Button>Button</Button>
+
+              <Link to={`/artedit/${artSelected}`}>
+                <Button color="primary" onClick={onEditClicked}>
+                  edit
+                </Button>
+              </Link>
             </div>
 
             <CardText>{selectedArt.description}</CardText>
