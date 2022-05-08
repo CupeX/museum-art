@@ -8,7 +8,7 @@ import GetCollectionsById from "../services/GetCollectionById";
 import { Card, CardGroup } from "reactstrap";
 import ArtPreview from "../components/ArtPreview";
 
-const Layout = () => {
+const ArtPreviewPage = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [enteredSearch, setEnteredSearch] = useState("");
   const [artSelected, setArtSelected] = useState("");
@@ -27,7 +27,7 @@ const Layout = () => {
       // );
     }
   }, [isLoaded, isLoadedById, selectedFilter]);
-  console.log("filtered list:", filteredList);
+  // console.log("filtered list:", filteredList);
 
   const selectedFilterHandler = (filter) => {
     setSelectedFilter(filter);
@@ -81,4 +81,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default ArtPreviewPage;
