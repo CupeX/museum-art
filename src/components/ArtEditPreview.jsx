@@ -4,13 +4,17 @@ import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 const ArtEditPreview = ({ previewData }) => {
   return (
     <>
-      <Card>
-        <CardImg alt="Card image cap" src={previewData.url} top width="100%" />
-        <CardBody>
-          <CardTitle tag="h5">{previewData.name}</CardTitle>
-          <CardText>{previewData.description}</CardText>
-        </CardBody>
-      </Card>
+      <CardImg
+        alt="Card image cap"
+        src={previewData.url}
+        top
+        style={{ width: "fit-content", maxHeight: "40%", maxWidth: "100%" }}
+        className="mx-auto"
+      />
+      <CardBody>
+        <CardTitle tag="h5">{previewData.name}</CardTitle>
+        <CardText>{previewData.description}</CardText>
+      </CardBody>
     </>
   );
 };

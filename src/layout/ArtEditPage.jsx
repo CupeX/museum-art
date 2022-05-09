@@ -20,14 +20,14 @@ const ArtEditPage = () => {
   return (
     <>
       {isLoadedById ? (
-        <CardGroup>
+        <CardGroup className="m-3" style={{ height: "95vh" }}>
           <Card>
             <EditForm
               selectedArt={selectedArt}
               onEditPreview={editPreviewClicked}
             />
           </Card>
-          <Card>
+          <Card className="p-3">
             {previewData ? <ArtEditPreview previewData={previewData} /> : ""}
           </Card>
         </CardGroup>

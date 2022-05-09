@@ -9,7 +9,7 @@ const Search = (props) => {
 
   return (
     <div>
-      <Input placeholder="search" onChange={changeHandler} />
+      <Input placeholder="search" onKeyUp={changeHandler} />
     </div>
   );
 };

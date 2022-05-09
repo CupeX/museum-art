@@ -1,13 +1,11 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const UpdateItem = () => {
   const [error, setError] = useState(null);
 
   const updateItemHandler = async (newData) => {
     const id = newData.id;
-    console.log("newDAta:", newData);
-    // const test = [newData];
-    // console.log("test:", test);
     try {
       const response = await fetch(`http://localhost:3001/collection/${id}`, {
         method: "PUT",
