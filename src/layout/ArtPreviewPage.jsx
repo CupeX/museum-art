@@ -18,16 +18,34 @@ const ArtPreviewPage = () => {
 
   useEffect(() => {
     if (isLoaded && isLoadedById) {
-      // filteredByType(selectedFilter);
-      setFilteredList(collections.collection);
-      // setFilteredList(
-      //   collections.collection.filter((x) =>
-      //     console.log(x.collection.filter((y) => y.type === selectedFilter))
-      //   )
-      // );
+      const dataListCopy = JSON.parse(JSON.stringify(collections.collection));
+      setFilteredList(dataListCopy);
+
+      setFilteredList(
+        dataListCopy.map((x) => {
+          if (selectedFilter !== "all") {
+            x.collection = x.collection.filter(
+              (y) => y.type === selectedFilter
+            );
+            return x;
+          }
+          return x;
+        })
+      );
     }
-  }, [isLoaded, isLoadedById, selectedFilter]);
-  // console.log("filtered list:", filteredList);
+  }, [isLoaded, isLoadedById, selectedFilter, collections, collectionsById]);
+
+  const filterBySearch = (enteredSearchValue) => {
+    const dataListCopy = JSON.parse(JSON.stringify(collections.collection));
+
+    let test = dataListCopy.map((x) => {
+      x.collection = x.collection.filter((y) =>
+        y.name.includes(enteredSearchValue)
+      );
+      return x;
+    });
+    setFilteredList(test);
+  };
 
   const selectedFilterHandler = (filter) => {
     setSelectedFilter(filter);
@@ -35,31 +53,16 @@ const ArtPreviewPage = () => {
 
   const searchHandler = (enteredSearchValue) => {
     setEnteredSearch(enteredSearchValue);
+    filterBySearch(enteredSearchValue);
   };
 
   const artPreviewHandler = (artId) => {
     setArtSelected(artId);
   };
 
-  // console.log(collections);
-
-  // const filteredByType = (selectedFilter) => {};
-
-  // const filteredByType = (selectedFilter) => {
-  //   setFilteredList(
-  //     filteredList.filter((x) => {
-  //       return x.collection.filter((y) => y.type === selectedFilter);
-  //     })
-  //   );
-  // };
-
-  const editArtHandler = () => {
-    console.log("edit art handler", artSelected);
-  };
-
   return (
-    <CardGroup>
-      <Card>
+    <CardGroup className="m-3 ">
+      <Card className="p-3">
         <Filter onFilterSelected={selectedFilterHandler} />
         <Search onEnteredSearch={searchHandler} />
 
@@ -75,11 +78,10 @@ const ArtPreviewPage = () => {
           ""
         )}
       </Card>
-      <Card>
+      <Card className="p-3" style={{ height: "95vh" }}>
         <ArtPreview
           artSelected={artSelected}
           collectionsById={collectionsById}
-          onEditArt={editArtHandler}
         />
       </Card>
     </CardGroup>

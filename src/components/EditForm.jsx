@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import UpdateItem from "../services/UpdatedItem";
 
@@ -7,21 +9,27 @@ const EditForm = (props) => {
   const [name, setName] = useState(selectedArt.name);
   const [url, setUrl] = useState(selectedArt.url);
   const [description, setDescription] = useState(selectedArt.description);
+  const navigate = useNavigate();
 
   const { updateItemHandler } = UpdateItem();
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
-    const updateData = {
-      name,
-      url,
-      description,
-      id: selectedArt.id,
-      type: selectedArt.type,
-    };
+    if (name === "" || description === "") {
+      alert("please enter corect data");
+    } else {
+      const updateData = {
+        name,
+        url,
+        description,
+        id: selectedArt.id,
+        type: selectedArt.type,
+      };
 
-    updateItemHandler(updateData);
+      updateItemHandler(updateData);
+      navigate("/");
+    }
   };
 
   const editPreviewHandler = () => {
@@ -29,7 +37,7 @@ const EditForm = (props) => {
   };
 
   return (
-    <Form className="w-50 m-3" method="POST" onSubmit={formSubmitHandler}>
+    <Form className="m-3" method="POST" onSubmit={formSubmitHandler}>
       <FormGroup>
         <Label for="title">Title</Label>
         <Input

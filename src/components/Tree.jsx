@@ -20,6 +20,12 @@ const Tree = (props) => {
                 {collectionItem.collection.map((collectionItemInside) => (
                   <li key={collectionItemInside.id}>
                     <Button
+                      style={{
+                        outline: "none",
+                        color: "black",
+                        background: "none",
+                        border: "none",
+                      }}
                       value={collectionItemInside.id}
                       onClick={(e) => artPreviewClicker(e)}
                     >
