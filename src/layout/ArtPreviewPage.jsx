@@ -38,13 +38,23 @@ const ArtPreviewPage = () => {
   const filterBySearch = (enteredSearchValue) => {
     const dataListCopy = JSON.parse(JSON.stringify(collections.collection));
 
-    let test = dataListCopy.map((x) => {
-      x.collection = x.collection.filter((y) =>
-        y.name.includes(enteredSearchValue)
-      );
-      return x;
-    });
-    setFilteredList(test);
+    if (selectedFilter !== "all") {
+      let test1 = filteredList.map((x) => {
+        x.collection = x.collection.filter((y) =>
+          y.name.includes(enteredSearchValue)
+        );
+        return x;
+      });
+      setFilteredList(test1);
+    } else {
+      let test = dataListCopy.map((x) => {
+        x.collection = x.collection.filter((y) =>
+          y.name.includes(enteredSearchValue)
+        );
+        return x;
+      });
+      setFilteredList(test);
+    }
   };
 
   const selectedFilterHandler = (filter) => {
@@ -62,7 +72,7 @@ const ArtPreviewPage = () => {
 
   return (
     <CardGroup className="m-3 ">
-      <Card className="p-3">
+      <Card className="p-3" style={{ maxWidth: "320px" }}>
         <Filter onFilterSelected={selectedFilterHandler} />
         <Search onEnteredSearch={searchHandler} />
 
